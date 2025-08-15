@@ -1,0 +1,712 @@
+<<<<<<< HEAD
+/* ==================== 1. Базові стилі та підключення шрифтів ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Tektur:wght@400;900&display=swap');
+
+html {
+    box-sizing: border-box;
+    font-size: 110%; /* Збільшуємо базовий розмір шрифту на 10% */
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif; /* Змінено шрифт на Montserrat */
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+}
+
+/* ==================== 2. Загальні елементи ==================== */
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 900;
+    margin: 0;
+    color: #fff;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==================== 3. Хедер ==================== */
+header {
+    height: 85px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+header .header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Логотип */
+.header_logo img {
+    height: 49.4px; /* Збільшено на 30% від 38px */
+    width: auto;
+}
+
+/* Навігація */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    gap: 25px;
+}
+
+.nav-links li {
+    padding-left: 0;
+}
+
+.nav-links a {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    color: #f67828;
+}
+
+/* Контактна інформація та кнопка */
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-info .phone-number {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cta-button,
+.hero-cta-button,
+.all-services-button,
+.all-projects-button,
+.contact-form button {
+    font-family: 'Tektur', sans-serif;
+    background: #f67828;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.cta-button:hover,
+.hero-cta-button:hover,
+.all-services-button:hover,
+.all-projects-button:hover,
+.contact-form button:hover {
+    background: #ff9147;
+    box-shadow: 3px 9px 8px rgba(246, 120, 40, 0.5);
+}
+
+/* Бургер-меню */
+.burger {
+    display: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+}
+
+.bar {
+    width: 35px;
+    height: 4px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* ==================== 4. Основні секції ==================== */
+main {
+    padding-top: 85px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.25rem;
+    color: #fff;
+}
+
+/* Секція Hero */
+.hero {
+    background-image: url('img/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 180px 0 100px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+}
+
+/* Секція "Про нас" (з іконками) */
+.about .features-grid,
+.services .service-list,
+.contacts .contact-grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.feature-item,
+.service-item,
+.contact-info-block {
+    text-align: center;
+}
+
+.feature-item h3,
+.contact-info-block p {
+    color: #fff;
+}
+
+.feature-item p {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+}
+
+.service-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.service-list li i {
+    margin-right: 10px;
+    color: #f67828;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #222;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif; /* Змінено шрифт */
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+/* Кнопки "Всі послуги/проекти" */
+.all-services-button,
+.all-projects-button {
+    display: block;
+    margin: 50px auto 0;
+}
+
+/* Контактна секція */
+.contacts {
+    background-color: #000;
+    color: #fff;
+    padding: 80px 0;
+}
+
+.contacts .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+/* ==================== 5. Футер ==================== */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer .container p {
+    font-size: 1rem;
+}
+
+/* ==================== 6. Адаптивність ==================== */
+@media (max-width: 1440px) {
+    .container {
+        max-width: 1250px;
+    }
+}
+
+@media (max-width: 1220px) {
+    .nav-links a {
+        font-size: 1rem;
+    }
+    .contact-info .phone-number,
+    .cta-button {
+        font-size: 0.9rem;
+    }
+    .nav-links li {
+        padding-left: 15px;
+    }
+    .header_logo img {
+        height: 42px;
+    }
+}
+
+@media (max-width: 991px) {
+    .nav-links,
+    .contact-info {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    /* Анімація бургера */
+    .change .bar:nth-child(1) { transform: rotate(-45deg) translate(-9px, 6px); }
+    .change .bar:nth-child(2) { opacity: 0; }
+    .change .bar:nth-child(3) { transform: rotate(45deg) translate(-9px, -9px); }
+
+    .nav-block {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 100vh;
+        background: #000;
+        right: 0;
+        top: 0;
+        width: 250px;
+        padding-top: 90px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -2px 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-block.nav_active {
+        transform: translateX(0);
+    }
+=======
+/* ==================== 1. Базові стилі та підключення шрифтів ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Tektur:wght@400;900&display=swap');
+
+html {
+    box-sizing: border-box;
+    font-size: 110%; /* Збільшуємо базовий розмір шрифту на 10% */
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif; /* Змінено шрифт на Montserrat */
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+}
+
+/* ==================== 2. Загальні елементи ==================== */
+.container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 900;
+    margin: 0;
+    color: #fff;
+}
+
+p {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==================== 3. Хедер ==================== */
+header {
+    height: 85px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+header .header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Логотип */
+.header_logo img {
+    height: 49.4px; /* Збільшено на 30% від 38px */
+    width: auto;
+}
+
+/* Навігація */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    gap: 25px;
+}
+
+.nav-links li {
+    padding-left: 0;
+}
+
+.nav-links a {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    color: #f67828;
+}
+
+/* Контактна інформація та кнопка */
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contact-info .phone-number {
+    font-family: 'Tektur', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    font-size: 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.cta-button,
+.hero-cta-button,
+.all-services-button,
+.all-projects-button,
+.contact-form button {
+    font-family: 'Tektur', sans-serif;
+    background: #f67828;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.cta-button:hover,
+.hero-cta-button:hover,
+.all-services-button:hover,
+.all-projects-button:hover,
+.contact-form button:hover {
+    background: #ff9147;
+    box-shadow: 3px 9px 8px rgba(246, 120, 40, 0.5);
+}
+
+/* Бургер-меню */
+.burger {
+    display: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+}
+
+.bar {
+    width: 35px;
+    height: 4px;
+    background-color: #fff;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+/* ==================== 4. Основні секції ==================== */
+main {
+    padding-top: 85px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.25rem;
+    color: #fff;
+}
+
+/* Секція Hero */
+.hero {
+    background-image: url('img/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 180px 0 100px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+}
+
+/* Секція "Про нас" (з іконками) */
+.about .features-grid,
+.services .service-list,
+.contacts .contact-grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.feature-item,
+.service-item,
+.contact-info-block {
+    text-align: center;
+}
+
+.feature-item h3,
+.contact-info-block p {
+    color: #fff;
+}
+
+.feature-item p {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+}
+
+.service-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #ccc;
+    font-size: 1rem;
+}
+
+.service-list li i {
+    margin-right: 10px;
+    color: #f67828;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #222;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif; /* Змінено шрифт */
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+/* Кнопки "Всі послуги/проекти" */
+.all-services-button,
+.all-projects-button {
+    display: block;
+    margin: 50px auto 0;
+}
+
+/* Контактна секція */
+.contacts {
+    background-color: #000;
+    color: #fff;
+    padding: 80px 0;
+}
+
+.contacts .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+/* ==================== 5. Футер ==================== */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+footer .container p {
+    font-size: 1rem;
+}
+
+/* ==================== 6. Адаптивність ==================== */
+@media (max-width: 1440px) {
+    .container {
+        max-width: 1250px;
+    }
+}
+
+@media (max-width: 1220px) {
+    .nav-links a {
+        font-size: 1rem;
+    }
+    .contact-info .phone-number,
+    .cta-button {
+        font-size: 0.9rem;
+    }
+    .nav-links li {
+        padding-left: 15px;
+    }
+    .header_logo img {
+        height: 42px;
+    }
+}
+
+@media (max-width: 991px) {
+    .nav-links,
+    .contact-info {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    /* Анімація бургера */
+    .change .bar:nth-child(1) { transform: rotate(-45deg) translate(-9px, 6px); }
+    .change .bar:nth-child(2) { opacity: 0; }
+    .change .bar:nth-child(3) { transform: rotate(45deg) translate(-9px, -9px); }
+
+    .nav-block {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 100vh;
+        background: #000;
+        right: 0;
+        top: 0;
+        width: 250px;
+        padding-top: 90px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -2px 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    .nav-block.nav_active {
+        transform: translateX(0);
+    }
+>>>>>>> a501e2b6bc4516bfb666056f2828daeca2fe6124
+}
