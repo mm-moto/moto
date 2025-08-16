@@ -162,6 +162,19 @@ header .header_container {
     transition: 0.4s;
 }
 
+/* Стилі для анімації іконки бургера (додано) */
+.burger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 .nav-block,
 .contact-info {
     display: flex;

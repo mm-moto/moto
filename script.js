@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Функція для перемикання меню
     function toggleMenu() {
         navBlock.classList.toggle('active');
+        burger.classList.toggle('active');
     }
 
     // Додати обробник подій для кнопки бургер-меню
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             navBlock.classList.remove('active');
+            burger.classList.remove('active');
         });
     });
 });
