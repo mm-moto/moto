@@ -293,7 +293,7 @@ main {
 }
 
 .find-us-title-bar {
-    background-color: #f67828;
+    background-color: #f67828; /* Змінено на помаранчевий */
     color: #fff;
     text-align: center;
     padding: 30px 0;
@@ -334,7 +334,6 @@ footer {
     gap: 20px;
 }
 
-/* Решта стилів залишаються без змін */
 .footer_logo img {
     height: 49.4px;
     width: auto;
@@ -488,32 +487,4 @@ footer {
     .footer_logo img {
         height: 42px;
     }
-}
-.find-us-section {
-    width: 100%;
-    margin-top: 50px;
-}
-
-.find-us-title-bar {
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    padding: 30px 0;
-}
-
-.find-us-title-bar h2 {
-    font-size: 2.25rem;
-    color: #fff;
-    margin: 0;
-}
-
-.map-container {
-    width: 100%;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 450px;
-    border: 0;
-    display: block;
 }
