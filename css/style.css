@@ -299,7 +299,7 @@ footer .container p {
     font-size: 1rem;
 }
 
-/* ==================== Перемикач мови ==================== */
+/* ==================== Перемикач мови (десктоп) ==================== */
 .lang-switcher {
     position: fixed;
     top: 50%;
@@ -408,5 +408,16 @@ footer .container p {
 
     .nav-links li {
         margin: 10px 0;
+    }
+}
+
+/* ==================== Перемикач мови (мобільний) ==================== */
+@media (max-width: 768px) {
+    .lang-switcher {
+        right: 10px;
+    }
+    .lang-link {
+        font-size: 1.2rem; /* збільшений розмір шрифту для мобільних пристроїв */
+        padding: 12px;
     }
 }
