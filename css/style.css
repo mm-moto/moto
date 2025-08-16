@@ -3,7 +3,7 @@
 
 html {
     box-sizing: border-box;
-    font-size: 120%; /* Збільшено базовий розмір шрифту на 20% від початкового */
+    font-size: 120%;
 }
 
 *,
@@ -92,7 +92,7 @@ header .header_container {
 
 .nav-links a {
     font-family: 'Tektur', sans-serif;
-    font-weight: 400; /* Regular */
+    font-weight: 400;
     color: #fff;
     font-size: 1.1rem;
     white-space: nowrap;
@@ -113,7 +113,7 @@ header .header_container {
 
 .contact-info .phone-number {
     font-family: 'Tektur', sans-serif;
-    font-weight: 400; /* Regular */
+    font-weight: 400;
     color: #fff;
     font-size: 1rem;
     text-decoration: none;
@@ -131,7 +131,7 @@ header .header_container {
     padding: 10px 20px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: 400; /* Regular */
+    font-weight: 400;
     border: none;
     cursor: pointer;
     transition: all 0.3s;
@@ -152,16 +152,19 @@ header .header_container {
 .burger {
     display: none;
     cursor: pointer;
-    position: relative;
-    z-index: 1001;
 }
 
 .bar {
-    width: 35px;
-    height: 4px;
+    width: 25px;
+    height: 3px;
     background-color: #fff;
-    margin: 6px 0;
+    margin: 5px 0;
     transition: 0.4s;
+}
+
+.nav-block,
+.contact-info {
+    display: flex;
 }
 
 /* ==================== 4. Основні секції ==================== */
@@ -321,7 +324,7 @@ footer .container p {
 
 @media (max-width: 991px) {
     .nav-links,
-    .contact-info {
+    .contact-info .phone-number {
         display: none;
     }
 
@@ -329,27 +332,41 @@ footer .container p {
         display: block;
     }
 
-    /* Анімація бургера */
-    .change .bar:nth-child(1) { transform: rotate(-45deg) translate(-9px, 6px); }
-    .change .bar:nth-child(2) { opacity: 0; }
-    .change .bar:nth-child(3) { transform: rotate(45deg) translate(-9px, -9px); }
+    .contact-info {
+        gap: 10px;
+    }
+    
+    .cta-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
 
+    /* Стилі для мобільного меню */
     .nav-block {
         display: flex;
         flex-direction: column;
         position: fixed;
-        height: 100vh;
-        background: #000;
-        right: 0;
-        top: 0;
-        width: 250px;
-        padding-top: 90px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        box-shadow: -2px 0 5px rgba(255, 255, 255, 0.5);
+        top: 85px; /* Висота хедера */
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 85px);
+        background-color: #000;
+        z-index: 999;
+        transition: left 0.3s ease-in-out;
+        padding: 20px;
     }
 
-    .nav-block.nav_active {
-        transform: translateX(0);
+    .nav-block.active {
+        left: 0;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
     }
 }
