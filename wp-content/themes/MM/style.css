@@ -1,0 +1,906 @@
+/*
+Theme Name: MM
+Theme URI: https://example.com/mm
+Author: Your Name
+Author URI: https://example.com
+Description: A simple and minimal WordPress theme.
+Version: 1.0
+Text Domain: mm
+*/
+
+/* ==================== Загальні стилі ==================== */
+/* Шрифти тепер підключаються через functions.php, тому цей рядок видалено */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.84;
+    background-color: #000000;
+    color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Tektur', sans-serif;
+}
+
+.entry-title {
+    font-family: 'Tektur', sans-serif;
+    color: #f1f1f1;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+main p, main li {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* ==================== Стилі для хедера ==================== */
+header {
+    background-color: #000;
+    padding: 1.32rem 0;
+    box-shadow: 0 2.65px 5.29px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1587px;
+    margin: 0 auto;
+    padding: 0 2.65rem;
+}
+
+.header_logo img {
+    height: 66.125px;
+    max-width: 100%;
+}
+
+.nav-and-contact {
+    display: flex;
+    align-items: center;
+    gap: 2.65rem;
+}
+
+.nav-block {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.3rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.32rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-family: 'Tektur', sans-serif;
+}
+
+.nav-links li a:hover {
+    color: #ff8c00;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 1.98rem;
+}
+
+.phone-number {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Tektur', sans-serif;
+}
+
+.cta-button {
+    background-color: #ff8c00;
+    color: #ffffff;
+    padding: 0.84rem 1.68rem;
+    border-radius: 5.62px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.12rem;
+}
+
+.cta-button:hover {
+    background-color: #cc7000;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+/* ==================== Стилі для мобільного бургер-меню ==================== */
+.burger .bar {
+    width: 33.06px;
+    height: 3.97px;
+    background-color: #fff;
+    margin: 6.61px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Оновлені стилі для активного бургер-меню, щоб створити "хрестик" */
+.burger.active .bar:nth-child(2) {
+    opacity: 0 !important;
+}
+
+.burger.active .bar:nth-child(1) {
+    transform: translateY(10.58px) rotate(45deg) !important;
+}
+
+.burger.active .bar:nth-child(3) {
+    transform: translateY(-10.58px) rotate(-45deg) !important;
+}
+
+/* Максимально виносимо хрестик по осі Z, фіксуємо його */
+.burger.active {
+    z-index: 1002;
+    position: fixed;
+    top: 1.32rem;
+    right: 2.65rem;
+}
+
+/* ==================== Стилі для футера ==================== */
+footer {
+    background-color: #000;
+    color: #ffffff;
+    padding: 2.65rem 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer a {
+    color: #ff8c00;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffa500;
+}
+
+/* ==================== Адаптивний дизайн (мобільна версія) ==================== */
+@media (max-width: 1200px) {
+    .header_container {
+        padding: 0 1.32rem;
+    }
+
+    .nav-and-contact {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        justify-content: center;
+        gap: 0;
+    }
+
+    .nav-block {
+        display: none;
+    }
+
+    .contact-info {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        justify-content: center;
+        gap: 0;
+    }
+
+    .phone-number {
+        display: none;
+    }
+
+    .cta-button {
+        padding: 0.56rem 1.12rem;
+        font-size: 0.98rem;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    /* Стили для активного мобильного меню */
+    .nav-block.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 999;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 3.30rem;
+    }
+
+    .nav-links li a {
+        font-size: 1.98rem;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    body.no-scroll {
+        overflow: hidden;
+    }
+}
+
+/* ==================== Стилі для Футера та контактної секції ==================== */
+.footer-section {
+    background-color: #000000;
+    color: #f1f1f1;
+    padding: 2.65rem 1.32rem;
+}
+
+.cta-button.footer-cta {
+    font-size: 1.4rem;
+}
+
+.contacts.section {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+.footer-contacts {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    min-height: 66.125vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-contacts::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.footer-contacts > * {
+    position: relative;
+    z-index: 2;
+}
+
+.section-title, .footer-contacts-title {
+    color: #ffffff !important;
+    text-align: center;
+    margin: 0;
+    font-family: 'Tektur', sans-serif;
+}
+
+.find-us-title-bar .section-title {
+    color: #ffffff !important;
+    text-align: center;
+    margin: 0;
+    font-family: 'Tektur', sans-serif;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.32rem;
+    max-width: 661.25px;
+    margin: 0 auto;
+    margin-top: 1.32rem;
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 1.15rem;
+    border-radius: 6.61px;
+    border: 1.32px solid #ddd;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+}
+
+.contact-form .cta-button {
+    align-self: center;
+}
+
+/* Новий контейнер для карток контактів */
+.contacts-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 1.5rem;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.contacts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1587px;
+    width: 100%;
+}
+
+/* Адаптивні стилі для карток контактів */
+@media (max-width: 1024px) {
+    .contacts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .contacts-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .contact-card {
+        padding: 1.2rem;
+    }
+
+    .contact-icon {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contacts-wrapper {
+        margin-top: 1rem;
+        gap: 1rem;
+    }
+
+    .contact-card {
+        padding: 1rem;
+        border-radius: 10px;
+    }
+}
+
+.contact-card {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 1.5rem;
+    border-radius: 13.225px;
+    box-shadow: 0 5.29px 13.225px rgba(0, 0, 0, 0.3);
+}
+
+.contact-card a {
+    color: #f1f1f1;
+    text-decoration: none;
+}
+
+.contact-card .contact-title {
+    font-family: 'Tektur', sans-serif;
+}
+
+.contact-icon {
+    font-size: 3.30rem;
+    color: #ff8c00;
+    margin-bottom: 0.75rem;
+}
+
+.find-us-section {
+    padding: 0;
+}
+
+.find-us-title-bar {
+    background-color: #ff8c00;
+    color: #ffffff;
+    padding: 1.32rem 0;
+    text-align: center;
+}
+
+.map-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 595.125px;
+}
+
+/* Обновленный блок для нижней части футера */
+.footer_bottom {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: "logo copyright social";
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.66rem 2.65rem;
+    gap: 0.66rem;
+    text-align: center;
+    box-sizing: border-box;
+    max-width: 1587px;
+    margin: 0 auto;
+}
+
+.footer_bottom .footer_logo {
+    grid-area: logo;
+    justify-self: start;
+    font-size: 1.32rem;
+    line-height: 1.65rem;
+}
+
+.footer_bottom .footer_logo-img {
+    max-height: 66.125px;
+    width: auto;
+    display: block;
+}
+
+.footer_bottom .footer_copyright {
+    grid-area: copyright;
+    justify-self: center;
+    font-size: 0.9775rem;
+}
+
+.footer_bottom .footer_social {
+    grid-area: social;
+    justify-self: end;
+}
+
+/* ВИПРАВЛЕНІ СТИЛІ ДЛЯ СОЦІАЛЬНИХ ІКОНОК */
+.footer_social a {
+    color: #f1f1f1;
+    font-size: 1.98rem;
+    margin: 0 0.66rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.footer_social a:hover {
+    color: #ff8c00;
+}
+
+/* Забезпечуємо правильне відображення Font Awesome іконок */
+.footer_social a i {
+    font-family: "Font Awesome 6 Brands", "Font Awesome 5 Brands" !important;
+    font-weight: 900 !important;
+    font-style: normal !important;
+    display: inline-block;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+/* Додаткове правило для fab класів */
+.footer_social a i.fab {
+    font-family: "Font Awesome 6 Brands", "Font Awesome 5 Brands" !important;
+}
+
+.footer_bottom .footer_copyright p {
+    word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .footer_bottom {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "logo"
+            "social"
+            "copyright";
+        justify-items: center;
+    }
+
+    .footer_bottom .footer_logo,
+    .footer_bottom .footer_social,
+    .footer_bottom .footer_copyright {
+        width: 100%;
+        text-align: center;
+        font-size: 1.15rem;
+    }
+
+    .footer_bottom .footer_logo-img {
+        max-height: 52.9px;
+        display: block;
+    }
+
+    .footer_social a {
+        margin: 0 0.5rem;
+        font-size: 1.5rem;
+    }
+}
+
+/* ==================== Стилі для секції послуг ==================== */
+.services {
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    width: 100%;
+    min-height: 50vh;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.services .section-title {
+    margin-bottom: 40px;
+}
+
+.service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* Затемнення контейнера карточок */
+    background-color: rgba(0, 0, 0, 0);
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.service-list li {
+    background-color: transparent;
+    border-radius: 12px;
+    box-shadow: none;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    padding: 20px;
+    align-items: center;
+}
+
+.service-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.service-list li:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 2px solid #f67828;
+    border-right: 2px solid #f67828;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    box-shadow: none;
+}
+
+.service-list li:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 2px solid #f67828;
+    border-left: 2px solid #f67828;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    /* Я видалив box-shadow звідси */
+}
+
+.service-icon-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.service-list li h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.service-list li p {
+    font-size: 1em;
+    color: var(--text-color, #f1f1f1);
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Адаптивні стилі */
+@media (max-width: 768px) {
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* ==================== Стилі для таблиці цін ==================== */
+.prices-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.category-title {
+    font-family: 'Tektur', sans-serif;
+    font-size: 2.2rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.price-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.price-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background: #222;
+    color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 600px;
+}
+
+.price-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.price-table tbody tr:hover {
+    background-color: #333;
+}
+
+.price-table strong {
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.1rem;
+}
+
+/* Стиль для ячеек-заголовков внутри таблицы */
+.price-table td[colspan="2"] {
+    background-color: #FF8C00;
+    text-align: left;
+    color: #000;
+}
+
+@media (max-width: 768px) {
+    .prices-section {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .category-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* ==================== СТИЛІ ДЛЯ СТОРІНКИ БЛОГУ ==================== */
+.page-header {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-family: 'Tektur', sans-serif;
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.blog-posts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.blog-post-card {
+    background-color: transparent;
+    border-radius: 12px;
+    box-shadow: none;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+}
+
+.blog-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.blog-post-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 2px solid #f67828;
+    border-right: 2px solid #f67828;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    box-shadow: none;
+}
+
+.blog-post-card:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 2px solid #f67828;
+    border-left: 2px solid #f67828;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    box-shadow: none;
+}
+
+.blog-post-card .post-thumbnail {
+    flex: 0 0 30%;
+    max-height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.blog-post-card .post-thumbnail img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.blog-post-card .post-thumbnail img:hover {
+    transform: scale(1.05);
+}
+
+.blog-post-card .post-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-post-card h2 {
+    font-family: 'Tektur', sans-serif;
+    font-size: 1.4em;
+    margin: 0 0 10px 0;
+    color: #fff;
+    text-align: left;
+}
+
+.blog-post-card h2 a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.blog-post-card h2 a:hover {
+    color: #f67828;
+}
+
+.blog-post-card .post-excerpt p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: #f1f1f1;
+    line-height: 1.5;
+    text-align: left;
+    margin: 0;
+}
+
+/* Стилі для пагінації */
+.pagination {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.page-numbers {
+    color: #fff;
+    background-color: #333;
+    padding: 8px 16px;
+    margin: 0 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.page-numbers:hover,
+.page-numbers.current {
+    background-color: #f67828;
+    color: #fff;
+}
+
+/* Адаптивні стилі для мобільних пристроїв */
+@media (max-width: 768px) {
+    .blog-post-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .blog-post-card .post-thumbnail {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+    }
+
+    .blog-post-card h2 {
+        text-align: center;
+    }
+
+    .blog-post-card .post-excerpt p {
+        text-align: center;
+    }
+}
+
+
+
+
+/* Language switcher styles */
+.lang-switcher {
+    position: fixed; /* Закріплює елемент на екрані */
+    top: 25%;        /* Відстань від верхнього краю екрану */
+    right: 0;        /* Розміщення біля правого краю */
+    display: flex;
+    flex-direction: column; /* Елементи будуть у стовпчик */
+    gap: 10px;
+    z-index: 1000; /* Розміщує перемикач над іншими елементами */
+    padding-right: 15px; /* Невеликий відступ від краю */
+}
+
+.lang-switcher a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid #f67828;
+    border-radius: 12px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lang-switcher a:hover {
+    background-color: #f67828;
+    color: #fff;
+}
+
+/* Правило, которое убирает маркеры списка (точки) */
+.lang-switcher ul,
+.lang-switcher li {
+    list-style: none; /* Убирает маркеры списка */
+    margin: 0;
+    padding: 0;
+}
