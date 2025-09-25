@@ -168,7 +168,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 <link rel="stylesheet" id="mm-style-css" href="/wp-content/themes/MM/style.css?ver=1.2" type="text/css" media="all">
 <link rel="stylesheet" id="font-awesome-official-css" href="https://use.fontawesome.com/releases/v7.0.1/css/all.css" type="text/css" media="all" integrity="sha384-rWj9FmWWt3OMqd9vBkWRhFavvVUYalYqGPoMdL1brs/qvvqz88gvLShYa4hKNyqb" crossorigin="anonymous">
 <link rel="stylesheet" id="elementor-frontend-css" href="/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.31.2" type="text/css" media="all">
-<link rel="stylesheet" id="elementor-post-52-css" href="/wp-content/uploads/elementor/css/post-52.css?ver=1758727529" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-post-52-css" href="/wp-content/uploads/elementor/css/post-52.css?ver=1758781596" type="text/css" media="all">
 <link rel="stylesheet" id="font-awesome-official-v4shim-css" href="https://use.fontawesome.com/releases/v7.0.1/css/v4-shims.css" type="text/css" media="all" integrity="sha384-cCODJHSivNBsaHei/8LC0HUD58kToSbDU+xT7Rs51BO1v/IvgT/uM0W6xMoUqKfn" crossorigin="anonymous">
 <link rel="stylesheet" id="elementor-gf-local-roboto-css" href="/wp-content/uploads/elementor/google-fonts/css/roboto.css?ver=1756133386" type="text/css" media="all">
 <link rel="stylesheet" id="elementor-gf-local-robotoslab-css" href="/wp-content/uploads/elementor/google-fonts/css/robotoslab.css?ver=1756133423" type="text/css" media="all">
@@ -299,7 +299,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
         <div class="container">
             <h2 class="section-title">&#1047;&#1072;&#1087;&#1080;&#1089;&#1072;&#1090;&#1080;&#1089;&#1100; &#1085;&#1072; &#1076;&#1110;&#1072;&#1075;&#1085;&#1086;&#1089;&#1090;&#1080;&#1082;&#1091; &#1090;&#1072; &#1088;&#1077;&#1084;&#1086;&#1085;&#1090;</h2>
             <div class="contact-grid">
-                <form id="contact-form" class="contact-form" action="https://hook.eu2.make.com/9kipbj9kmturcn9htaacqjx78sz2v6po" method="POST">
+                <form id="contact-form" class="contact-form">
                     <input type="text" id="name" name="name" placeholder="&#1042;&#1072;&#1096;&#1077; &#1110;&#1084;'&#1103;" required>
                     <p id="nameError" class="error-message"></p>
                     
@@ -310,7 +310,7 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
                     
                     <div id="status-message"></div>
                     
-                    <button type="submit" class="cta-button">&#1053;&#1072;&#1076;&#1110;&#1089;&#1083;&#1072;&#1090;&#1080; &#1079;&#1072;&#1103;&#1074;&#1082;&#1091;</button>
+                    <button type="button" id="submit-btn" class="cta-button">&#1053;&#1072;&#1076;&#1110;&#1089;&#1083;&#1072;&#1090;&#1080; &#1079;&#1072;&#1103;&#1074;&#1082;&#1091;</button>
                 </form>
             </div>
         </div>
@@ -384,46 +384,214 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16
 		</div>
     </div>
 </footer>
- 
+
+<style>
+#status-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+
+#status-message.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+#status-message.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+#status-message:not(.success):not(.error) {
+    background-color: #cce5ff;
+    border: 1px solid #b3d7ff;
+    color: #0c5aa6;
+}
+</style>
+
 <script>
-    // Ждем, пока весь DOM будет загружен
-    document.addEventListener('DOMContentLoaded', function () {
-        // Находим форму и элемент для вывода сообщений
-        const form = document.getElementById('contact-form');
-        const statusMessage = document.getElementById('status-message');
+// Сообщения для интернационализации
+const messages = {
+    nameRequired: "Будь ласка, введіть ваше ім'я",
+    phoneRequired: "Будь ласка, введіть номер телефону", 
+    sending: "Відправлення...",
+    success: "Ваша заявка успішно надіслана!",
+    error: "Виникла помилка. Будь ласка, перевірте ваше з'єднання і спробуйте ще раз.",
+    submitButton: "Надіслати заявку"
+};
 
-        // Добавляем обработчик события отправки формы
-        form.addEventListener('submit', async function (event) {
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM загружен, инициализация формы...');
+    
+    const form = document.getElementById('contact-form');
+    const submitButton = document.getElementById('submit-btn');
+    const statusMessage = document.getElementById('status-message');
+    const webhookURL = 'https://hook.eu2.make.com/9kipbj9kmturcn9htaacqjx78sz2v6po';
+
+    console.log('Элементы формы:', { 
+        form: !!form, 
+        submitButton: !!submitButton, 
+        statusMessage: !!statusMessage 
+    });
+
+    if (form && submitButton && statusMessage) {
+        console.log('Все элементы найдены, добавляем обработчики...');
+
+        // Функция валидации формы
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            console.log('Валидация:', { name, phone });
+            
+            if (!name) {
+                alert(messages.nameRequired);
+                return false;
+            }
+            
+            if (!phone) {
+                alert(messages.phoneRequired);
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Обработчик клика по кнопке
+        submitButton.addEventListener('click', async function (event) {
+            console.log('Клик по кнопке отправки');
             event.preventDefault();
+            event.stopPropagation();
 
-            statusMessage.textContent = 'Відправлення...';
-            statusMessage.classList.remove('success', 'error');
+            // Валидация
+            if (!validateForm()) {
+                console.log('Валидация не прошла');
+                return;
+            }
+
+            console.log('Валидация прошла, начинаем отправку...');
+
+            // Показываем состояние загрузки
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = messages.sending;
+            
+            statusMessage.textContent = messages.sending;
+            statusMessage.className = 'status-message';
+            statusMessage.style.display = 'block';
+            statusMessage.style.color = 'blue';
+            statusMessage.style.padding = '10px';
+            statusMessage.style.marginTop = '10px';
+            statusMessage.style.border = '1px solid blue';
+            statusMessage.style.borderRadius = '4px';
+            statusMessage.style.backgroundColor = '#cce5ff';
 
             try {
-                const formData = new FormData(form);
+                // Получаем данные из формы
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const problem = document.getElementById('problem').value.trim();
 
-                const response = await fetch(form.action, {
+                console.log('Данные для отправки:', { name, phone, problem });
+
+                // Создаем FormData
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('phone', phone);
+                formData.append('problem', problem);
+
+                console.log('Отправляем запрос...');
+
+                // Отправляем данные
+                const response = await fetch(webhookURL, {
                     method: 'POST',
-                    body: formData,
+                    body: formData
                 });
 
+                console.log('Получен ответ:', response.status, response.statusText);
+
+                // Проверяем успешность
                 if (response.ok) {
-                    statusMessage.textContent = 'Ваша заявка успішно надіслана!';
-                    statusMessage.classList.add('success');
+                    console.log('Отправка успешна!');
+                    statusMessage.textContent = messages.success;
+                    statusMessage.className = 'status-message success';
+                    statusMessage.style.display = 'block';
+                    statusMessage.style.color = 'green';
+                    statusMessage.style.padding = '10px';
+                    statusMessage.style.marginTop = '10px';
+                    statusMessage.style.border = '1px solid green';
+                    statusMessage.style.borderRadius = '4px';
+                    statusMessage.style.backgroundColor = '#d4edda';
+                    
+                    console.log('Сообщение об успехе должно быть видно');
+                    
+                    // Очищаем форму
                     form.reset();
+                    
+                    // Отслеживаем событие Lead для Facebook Pixel
+                    try {
+                        if (typeof fbq === 'function') {
+                            fbq('track', 'Lead');
+                        }
+                    } catch (fbError) {
+                        console.log('Facebook Pixel недоступен (заблокирован)', fbError);
+                    }
+
+                    // Скрываем сообщение через 5 секунд
+                    setTimeout(() => {
+                        statusMessage.style.display = 'none';
+                    }, 5000);
                 } else {
-                    statusMessage.textContent = 'Виникла помилка. Спробуйте ще раз пізніше.';
-                    statusMessage.classList.add('error');
+                    throw new Error('Response not ok: ' + response.status);
                 }
+
             } catch (error) {
-                console.error('Помилка при відправленні форми:', error);
-                statusMessage.textContent = 'Виникла помилка. Будь ласка, перевірте ваше з'єднання і спробуйте ще раз.';
-                statusMessage.classList.add('error');
+                console.error('Ошибка при отправке формы:', error);
+                statusMessage.textContent = messages.error;
+                statusMessage.className = 'status-message error';
+                statusMessage.style.display = 'block';
+                statusMessage.style.color = 'red';
+                statusMessage.style.padding = '10px';
+                statusMessage.style.marginTop = '10px';
+                statusMessage.style.border = '1px solid red';
+                statusMessage.style.borderRadius = '4px';
+                statusMessage.style.backgroundColor = '#f8d7da';
+            } finally {
+                // Возвращаем кнопку в исходное состояние
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                console.log('Обработка завершена');
             }
         });
-    });
+
+        // Обработка Enter в полях ввода
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    submitButton.click();
+                }
+            });
+        });
+
+        console.log('Обработчики добавлены успешно');
+
+    } else {
+        console.error("Не найдены элементы формы:", {
+            form: !!form,
+            submitButton: !!submitButton,  
+            statusMessage: !!statusMessage
+        });
+    }
+});
 </script>
- 
+
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/moto\/*"},{"not":{"href_matches":["\/moto\/wp-*.php","\/moto\/wp-admin\/*","\/moto\/wp-content\/uploads\/*","\/moto\/wp-content\/*","\/moto\/wp-content\/plugins\/*","\/moto\/wp-content\/themes\/MM\/*","\/moto\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
